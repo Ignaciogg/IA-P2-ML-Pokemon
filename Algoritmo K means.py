@@ -4,7 +4,7 @@
     Clasifica cada punto en una categoría, basándose en la categoría de sus vecinos más cercanos. 
     Suele utilizarse en sistemas de recomendación, búsqueda semántica y detección de anomalías. 
     
-    Pros: Sencillo de aprender e implementar
+    Pros: Sencillo de aprender e implementar. Robusto y versátil.
     Contras: Utiliza todo el dataset para entrenar “cada punto” y por eso requiere de uso de mucha memoria y recursos CPU. 
     
     Cómo funciona:
@@ -16,8 +16,20 @@ from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
 import pandas as pd
 
-df = pd.read_csv("pokemon.csv")
+dfP = pd.read_csv("pokemon.csv")
 
-df.columns
-# En este algoritmo, hemos decidido ver 
+dfP.columns
 
+# Podemos utilizar este algoritmo para ver cuáles son los Pokémon más fuertes, tratando la suma de estadísticas (base_total):
+dfP2 = dfP[["base_total"]].dropna()
+dfP2.describe()
+
+# Vemos cuántos Pokémon tienen un sumatorio de 500 puntos de estadísticas, divididos en Ataque, At.Esp., Defensa, Def.Esp. y Velocidad
+filtro = dfP2["base_total"] > 500
+
+# Etiquetas
+dfP2["base_total"][filtro] = "Fuerte"
+dfP2["base_total"][filtro == False] = "Normal-Bajo"
+
+# Sugiero utilizar un número impar para la comparación entre vecinos, de forma que podamos dilucidar posibles empates...
+nbrs_3 = KNeighborsClassifier(n_neighbors = 3, n_jobs = -1)
