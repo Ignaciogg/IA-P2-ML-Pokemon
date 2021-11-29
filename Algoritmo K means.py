@@ -3,6 +3,8 @@
 """ Sirve esencialmente para clasificar valores buscando los puntos de datos “más similares” (por cercanía) aprendidos en la etapa de entrenamiento.
     Clasifica cada punto en una categoría, basándose en la categoría de sus vecinos más cercanos. 
     Suele utilizarse en sistemas de recomendación, búsqueda semántica y detección de anomalías. 
+
+    https://www.aprendemachinelearning.com/clasificar-con-k-nearest-neighbor-ejemplo-en-python/#:~:text=K%2DNearest%2DNeighbor%20es%20un,el%20mundo%20del%20Aprendizaje%20Autom%C3%A1tico.
     
     Pros: Sencillo de aprender e implementar. Robusto y versátil.
     Contras: Utiliza todo el dataset para entrenar “cada punto” y por eso requiere de uso de mucha memoria y recursos CPU. 
